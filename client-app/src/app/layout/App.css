@@ -1,0 +1,229 @@
+:root{
+  --primary-color: #2c72d4;
+  --primary-light: #6fa7f5;
+  --primary-dark: #003175;
+  --primary-gradient:linear-gradient(to right,var(--primary-color),var(--primary-light));
+  /*--fonts:"Roboto", Times, serif;*/
+  --font-size: 1.5em;
+  --text-color: white;
+  --clear-menu: 119px;
+}
+body{
+  background-color:lightgrey;
+}
+
+footer{
+  z-index:0;
+  background-color: transparent;
+  /*box-shadow: 0px 0px 0px 10px rgba(34,36,38,.15);*/
+  min-height: 200px;
+}
+
+
+.ui.header{
+  color:#fff;
+}
+.ui.menu{
+  background-image: linear-gradient(to right,var(--primary-color),var(--primary-light));
+  box-shadow: 1px 1px 2px 7px rgba(34,36,38,.15);
+  border:none;
+}
+
+.ui.menu .item, .ui.menu .item.active{
+  font-size: var(--font-size);
+  color: var(--text-color);
+}
+
+.ui.menu .item.active{
+  background: transparent;
+}
+.ui.menu .item:hover:not(.right), .ui.menu .item.active:hover:not(.right){
+  background-color: var(--primary-dark) !important;
+  font-size: var(--font-size);
+  color: var(--text-color) !important;
+}
+
+/*Client Login Button NavBar*/
+
+.ui.menu .login-btn{
+  color:var(--text-color);
+}
+
+ .client-login-item:hover{
+  border:none;
+}
+
+
+
+
+
+
+/*TICKET DASHBOARD*/
+
+.ticket-dashboard{
+  margin-top: 130px;
+}
+
+.ticket-segment{
+  background-image: linear-gradient(to right,var(--primary-color),var(--primary-light)) !important;
+}
+
+.ticket-item{
+  background-color: white;
+  border-radius: .3rem;
+  padding:5px;
+}
+
+.ticket-header{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom:20px;
+}
+
+.ticket-site{
+  margin-bottom: 20px;
+}
+
+.ticket-description{
+  margin-bottom:20px;
+}
+
+.ticket-text{
+  margin-top:20px !important;
+  box-shadow: 1px 1px 2px 2px rgba(34,36,38,.15);
+  border-radius: .3rem;
+  padding:5px 5px 20px 5px;
+  margin:0px 5px 0px 5px;
+}
+
+/*SLIDESHOW AND QUOTE FORM*/
+.quoteform-div{
+  max-width:500px !important;
+  max-height: 500px;
+  position: absolute;
+  z-index: 2;
+  bottom: 25%;
+  right: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px;
+}
+
+.quoteForm{
+  padding:50px;
+
+}
+.quote-description > textarea{
+  max-height: 205px !important;
+  min-height: 120px;
+}
+
+
+/* Slideshow */
+
+.slideshow {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 5px 5px rgb(34 36 38 / 15%);
+  border-bottom-left-radius:.3rem;
+  border-bottom-right-radius:.3rem;
+  width: 100%;
+  margin-top: var(--clear-menu);
+  padding-bottom: 10px;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 2000ms;
+}
+
+.slide {
+  display: inline-block;
+
+  height: 700px;
+  width: 100%;
+}
+
+/*SLideshow Buttons */
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+  background-color: var(--primary-color);
+}
+
+/*Portfolio Slider*/
+.port-slideshow {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 1px 5px 5px rgb(34 36 38 / 15%);
+  border-bottom-left-radius:.3rem;
+  border-bottom-right-radius:.3rem;
+  height: 500px;
+  width: 100%;
+}
+
+.port-slideshowSlider {
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  height:100%;
+  width:160%;
+  white-space: nowrap;
+  
+}
+
+.port-slide {
+  display: inline-block;
+  
+
+  height: 300px;
+  width: 300px;
+  transition: margin ease 2000ms;
+}
+
+/*Home Page*/
+
+.segment-div, .segment-div-white{
+  background-image:linear-gradient(to bottom right,var(--primary-color),var(--primary-light));
+  border-radius: .3rem;
+  width: 100%;
+  padding: 30px;
+}
+
+.segment-div-white{
+  z-index: 2;
+  background-image: none;
+  box-shadow: 0 1px 2px 10px rgb(34 36 38 / 15%);
+
+}
+
+
+/*Stlye My Photo on HomePage*/
+.ui.large.image{
+  box-shadow: 2px 2px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/*Profile*/
+
+.ui.header.profile-header{
+  margin-top: var(--clear-menu);
+}
