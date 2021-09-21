@@ -227,3 +227,8 @@ footer{
 .ui.header.profile-header{
   margin-top: var(--clear-menu);
 }
+
+/*Footer*/
+footer{
+  background-image: var(--primary-gradient);
+}

@@ -31,6 +31,22 @@ export default class TicketStore{
     }
 
 
+    createTicket = async (ticket:Ticket) =>{
+        try{
+            await agent.Tickets.create(ticket);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
+    deleteTicket = async (id:string) =>{
+        try{
+            await agent.Tickets.delete(id);
+        }catch(error){
+            console.log(error);
+        }
+    }
 
 
 }

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { Button, Divider, Item, Segment } from "semantic-ui-react";
 import { Ticket } from "../../../app/models/ticket";
+import { useStore } from "../../../app/stores/store";
 
 interface Props{
     ticket: Ticket;
@@ -8,10 +9,16 @@ interface Props{
 
 export default function TicketItem({ticket}: Props)
 {
+    const{ticketStore} = useStore();
+    const{deleteTicket} = ticketStore;
+
+    function handleTicketDelete(e:SyntheticEvent<HTMLButtonElement>, id:string){
+        deleteTicket(id);
+    }
     return(
         <Segment.Group>
             <Segment className="ticket-segment">
-                <Item>
+                <Item key={ticket.id}>
                     <Item.Content className="ticket-item" >
                         <Item.Header className="ticket-header">
                             <span className="ticket-username"><strong>User:</strong> {ticket.username}</span>
@@ -30,6 +37,7 @@ export default function TicketItem({ticket}: Props)
                             </div>
                         </Item.Description>
                         <Button positive>Reply</Button>
+                        <Button negative onClick={(e)=>{handleTicketDelete(e,ticket.id)}}>Delete</Button>
                         <Button color='blue' floated='right'>Archive</Button>
                     </Item.Content>
 
