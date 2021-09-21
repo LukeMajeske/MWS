@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Tickets;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -10,6 +11,7 @@ namespace API.Controllers
     public class TicketsController : BaseApiController
     {
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<Ticket>>> GetTickets()
         {
