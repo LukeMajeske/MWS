@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Container, Header, Segment, Image, Card, Grid } from "semantic-ui-react";
+import { Header, Segment, Image,Grid } from "semantic-ui-react";
 import Portfolio from "./Portfolio";
 import SlideShow from "./SlideShow";
 

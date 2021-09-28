@@ -1,5 +1,4 @@
-import { ACTION } from "mobx/dist/internal";
-import React, { useEffect, useRef, useState, useReducer, useLayoutEffect} from "react";
+import React, { useEffect, useRef, useState, useReducer} from "react";
 import ReactDOM from "react-dom";
 import { Button, Header } from "semantic-ui-react";
 
@@ -82,7 +81,7 @@ function Portfolio(){
             setTransitionEnabled(false);
             console.log('Set FALSE');
         }*/
-        console.log(index, direction);
+        //console.log(index, direction);
         if(direction === -1){//move to the right
             dispatch({type:ACTIONS.ADDSLIDELAST, ind:index});
             dispatch({type:ACTIONS.DELSLIDESTART});

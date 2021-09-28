@@ -11,7 +11,6 @@ namespace API.Controllers
     public class TicketsController : BaseApiController
     {
 
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<List<Ticket>>> GetTickets()
         {

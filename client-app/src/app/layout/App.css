@@ -228,6 +228,14 @@ footer{
   margin-top: var(--clear-menu);
 }
 
+/*Login Form
+.login-form{
+  margin-top: var(--clear-menu);
+}*/
+
+.login-img{
+  margin:auto;
+}
 /*Footer*/
 footer{
   background-image: var(--primary-gradient);

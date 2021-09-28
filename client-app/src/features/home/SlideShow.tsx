@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import website_img from "../assets/website.jpg";
 import client_img from "../assets/client.jpg";
 import QuoteForm from "./QuoteForm";
-import { Segment } from "semantic-ui-react";
 
 const images = [website_img, client_img];
 const delay = 5000;

@@ -1,7 +1,7 @@
 import {Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
-import { Grid, GridColumn, Input, Segment,Form, Header} from "semantic-ui-react";
+import { Grid, GridColumn, Segment,Form, Header} from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import TicketItem from "./TicketItem";
 import {v4 as uuid} from "uuid";

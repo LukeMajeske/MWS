@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Header, Input} from "semantic-ui-react";
+import {Form, Header, Input} from "semantic-ui-react";
 
 
 export default function QuoteForm(){
