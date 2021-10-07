@@ -11,5 +11,24 @@ namespace Persistence
         }
 
         public DbSet<Ticket> Tickets { get; set; }
+
+        public DbSet<TicketUserRelationship> TicketUserRelationships {get; set;}
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<TicketUserRelationship>(x => x.HasKey(tu => new {tu.AppUserId, tu.TicketId}));
+
+            builder.Entity<TicketUserRelationship>()
+                .HasOne(u => u.AppUser)
+                .WithMany(t => t.Tickets)
+                .HasForeignKey(tu => tu.AppUserId);
+
+            builder.Entity<TicketUserRelationship>()
+                .HasOne(t => t.Ticket)
+                .WithMany(u => u.TicketUser)
+                .HasForeignKey(tu => tu.TicketId);
+        }
     }
 }

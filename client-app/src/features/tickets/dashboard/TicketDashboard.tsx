@@ -5,12 +5,13 @@ import { Grid, GridColumn, Segment,Form, Header} from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import TicketItem from "./TicketItem";
 import {v4 as uuid} from "uuid";
+import { Ticket } from "../../../app/models/ticket";
 
 
 export default observer(function TicketDashboard()
 {
     const {ticketStore} = useStore();
-    const {createTicket} = ticketStore;
+    const {createTicket,ticketRegistry} = ticketStore;
 
     const [ticket, setTicket] = useState({
         id: '',
@@ -25,15 +26,17 @@ export default observer(function TicketDashboard()
         ticketStore.loadTickets();
     },[ticketStore])
 
-    const {tickets} = ticketStore;
+    //const {tickets} = ticketStore;
 
     function handleSubmit(){
         const newTicket ={
             ...ticket,
-            id:uuid()};
+            id:uuid(),
+    };
 
-        console.log(newTicket);
+        //console.log(newTicket);
         createTicket(newTicket);
+        ticketStore.loadTickets();
     }
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
@@ -41,15 +44,20 @@ export default observer(function TicketDashboard()
         setTicket({...ticket,[name]:value});
     }
 
+    function returnTickets(){
+        var ticket_items = [];
+        for(var ticket of ticketRegistry.values()){
+            ticket_items.push(<TicketItem key={ticket.id} ticket={ticket}/>);
+        }
+        return ticket_items;
+    }
+
     return(
         <Fragment>
             <div className='ticket-dashboard'>
                 <Grid>
                     <GridColumn width='10'>
-                        {tickets.map((ticket) => (
-                            <TicketItem key={ticket.id} ticket={ticket}/>
-                        ))} 
-
+                        {returnTickets()} 
                     </GridColumn>
                     <GridColumn width='6'>
                         <Segment>

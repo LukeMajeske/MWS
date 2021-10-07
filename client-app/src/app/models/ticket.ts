@@ -1,3 +1,4 @@
+import { Profile } from "./profile";
 
 
 export interface Ticket{
@@ -7,5 +8,6 @@ export interface Ticket{
     site: string;
     subject: string;
     description: string;
+    user?: Profile[];
     //status: string;
 }

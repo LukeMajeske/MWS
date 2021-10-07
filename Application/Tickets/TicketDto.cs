@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Application.Profiles;
 
-namespace Domain
+namespace Application.Tickets
 {
-    public class Ticket
+    public class TicketDto
     {
-    
         public Guid Id { get; set; }
 
         public DateTime Date {get; set;}
@@ -18,8 +20,6 @@ namespace Domain
 
         public string Description{get; set;}
 
-        public ICollection<TicketUserRelationship> TicketUser{get; set;} = new List<TicketUserRelationship>();
-        //public string Status { get; set; }
-
+        public ICollection<Profile> User{get; set;}
     }
 }

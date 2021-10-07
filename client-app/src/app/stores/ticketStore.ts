@@ -11,13 +11,12 @@ export default class TicketStore{
     }
 
     private setTickets = (tickets:Ticket[]) => {
-        var new_tickets = [];
+        //var new_tickets = [];
         tickets.forEach((ticket)=>{
             ticket.date = ticket.date.split('T')[0];
-            new_tickets.push(ticket);
+            this.ticketRegistry.set(ticket.id,ticket);
+            //new_tickets.push(ticket);
         })
-
-        this.tickets = new_tickets;
     }
 
 

@@ -10,6 +10,12 @@ import { useStore } from "../stores/store";
 export default observer(function NavBar()
 {
     const {userStore, modalStore} = useStore();
+    function displayProfile(){
+        if(userStore.isLoggedIn){
+            return(<Menu.Item as={NavLink} to='/profile'>Profile</Menu.Item>)
+        }
+    }
+
     return(
         <Menu borderless fixed='top'>
             <Menu.Item as={NavLink} to='/' exact>
@@ -18,7 +24,7 @@ export default observer(function NavBar()
             <Menu.Item>About</Menu.Item>
             <Menu.Item>F.A.Q</Menu.Item>
             <Menu.Item>Contact</Menu.Item>
-            <Menu.Item as={NavLink} to='/profile'>Profile</Menu.Item>
+            {displayProfile()}
             <Menu.Item as={NavLink} to='/tickets'>Ticket Dashboard</Menu.Item>
             {!userStore.isLoggedIn ? (
             <Menu.Item position='right'>

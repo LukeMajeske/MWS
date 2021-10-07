@@ -20,6 +20,8 @@ using Application.Core;
 using API.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Application.Interfaces;
+using Infrastructure.Security;
 
 namespace API
 {
@@ -62,6 +64,8 @@ namespace API
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             services.AddIdentityServices(_config);
+
+            services.AddScoped<IUserAccessor, UserAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

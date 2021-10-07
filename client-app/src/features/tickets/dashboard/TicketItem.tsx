@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent } from "react";
 import { Button, Divider, Item, Segment } from "semantic-ui-react";
 import { Ticket } from "../../../app/models/ticket";
@@ -5,15 +6,17 @@ import { useStore } from "../../../app/stores/store";
 
 interface Props{
     ticket: Ticket;
+    //username: string;
 }
 
-export default function TicketItem({ticket}: Props)
+export default observer(function TicketItem({ticket}: Props)
 {
     const{ticketStore} = useStore();
-    const{deleteTicket} = ticketStore;
+    const{deleteTicket, ticketRegistry} = ticketStore;
 
     function handleTicketDelete(e:SyntheticEvent<HTMLButtonElement>, id:string){
         deleteTicket(id);
+        ticketRegistry.delete(id);
     }
     return(
         <Segment.Group>
@@ -21,7 +24,7 @@ export default function TicketItem({ticket}: Props)
                 <Item key={ticket.id}>
                     <Item.Content className="ticket-item" >
                         <Item.Header className="ticket-header">
-                            <span className="ticket-username"><strong>User:</strong> {ticket.username}</span>
+                            <span className="ticket-username"><strong>User:</strong> {ticket.user[0].username}</span>
                             <span className="ticket-subject">
                                 <strong>Subject:</strong> {ticket.subject}<br/>
                                 <strong>Date:</strong>{ticket.date}
@@ -45,4 +48,4 @@ export default function TicketItem({ticket}: Props)
             </Segment>
         </Segment.Group>
     )
-}
+})

@@ -12,7 +12,7 @@ namespace API.Controllers
     {
 
         [HttpGet]
-        public async Task<ActionResult<List<Ticket>>> GetTickets()
+        public async Task<ActionResult<List<TicketDto>>> GetTickets()
         {
             return await Mediator.Send(new List.Query());
         }
