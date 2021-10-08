@@ -16,10 +16,12 @@ namespace API.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-         private readonly TokenService _tokenService;
+        private readonly TokenService _tokenService;        
+        private readonly RoleManager<IdentityRole> _roleManager;
         public AccountController(UserManager<AppUser> userManager,
-        SignInManager<AppUser> signInManager, TokenService tokenService)
+        SignInManager<AppUser> signInManager, TokenService tokenService, RoleManager<IdentityRole> roleManager)
         {
+            _roleManager = roleManager;
             _tokenService = tokenService;
             _signInManager = signInManager;
             _userManager = userManager;
@@ -61,13 +63,14 @@ namespace API.Controllers
             DisplayName = registerDto.DisplayName,
             Email = registerDto.Email,
             UserName = registerDto.Username,
-            
+
         };
 
         var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-        if(result.Succeeded)
+        if (result.Succeeded)
         {
+            await _userManager.AddToRoleAsync(user,"Client");
             return CreateUserObject(user);
         }
         return BadRequest("Problem Registering User");
@@ -83,12 +86,12 @@ namespace API.Controllers
 
     private UserDto CreateUserObject(AppUser user)
     {
-            return new UserDto
-            {
-                DisplayName = user.DisplayName,
-                Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
-            };
+        return new UserDto
+        {
+            DisplayName = user.DisplayName,
+            Username = user.UserName,
+            Token = _tokenService.CreateToken(user)
+        };
 
     }
 }

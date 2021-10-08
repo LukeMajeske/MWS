@@ -9,9 +9,23 @@ namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, 
+        RoleManager<IdentityRole> roleManager)
         {
+            if(!roleManager.Roles.Any()){
+                var userRoles = new List<IdentityRole>
+                {
+                    new IdentityRole {Name = "SuperAdmin"},
+                    new IdentityRole {Name = "Admin"},
+                    new IdentityRole {Name = "Client"},
+                    new IdentityRole {Name = "User"}
+                };
 
+                foreach (var role in userRoles){
+                    await roleManager.CreateAsync(role);
+                }
+
+            }
             if(!userManager.Users.Any())
             {
                 var users = new List<AppUser>
@@ -61,5 +75,7 @@ namespace Persistence
             await context.Tickets.AddRangeAsync(tickets);
             await context.SaveChangesAsync();
         } 
+
+        
     }
 }

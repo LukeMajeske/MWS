@@ -29,7 +29,6 @@ export default observer(function NavBar()
             {!userStore.isLoggedIn ? (
             <Menu.Item position='right'>
                 <Button className='login-btn' onClick={() => modalStore.openModal(<LoginForm/>)} positive>Client Login</Button>
-                <Button className='login-btn' onClick={() => modalStore.openModal(<LoginForm/>)} positive>Register</Button>
             </Menu.Item>) : (
              <Menu.Item position='right'>
                  Welcome {userStore.user.username}!

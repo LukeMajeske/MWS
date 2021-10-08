@@ -1,4 +1,5 @@
 using Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            //Ticket to User 
             builder.Entity<TicketUserRelationship>(x => x.HasKey(tu => new {tu.AppUserId, tu.TicketId}));
 
             builder.Entity<TicketUserRelationship>()
@@ -29,6 +30,10 @@ namespace Persistence
                 .HasOne(t => t.Ticket)
                 .WithMany(u => u.TicketUser)
                 .HasForeignKey(tu => tu.TicketId);
+
+
+            builder.Entity<AppUser>()
+            .HasOne(r => r.Role);
         }
     }
 }
