@@ -5,7 +5,6 @@ import { Grid, GridColumn, Segment,Form, Header} from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import TicketItem from "./TicketItem";
 import {v4 as uuid} from "uuid";
-import { Ticket } from "../../../app/models/ticket";
 
 
 export default observer(function TicketDashboard()

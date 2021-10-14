@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -39,7 +40,7 @@ namespace API.Controllers
 
         if (result.Succeeded)
         {
-            return CreateUserObject(user);
+            return await CreateUserObject(user);
         }
 
         return Unauthorized();
@@ -71,26 +72,35 @@ namespace API.Controllers
         if (result.Succeeded)
         {
             await _userManager.AddToRoleAsync(user,"Client");
-            return CreateUserObject(user);
+            return await CreateUserObject(user);
         }
         return BadRequest("Problem Registering User");
     }
 
+    
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
         var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
-        return CreateUserObject(user);
+        return await CreateUserObject(user);
 
     }
+    
+    [HttpGet("role")]
+    public async Task<IList<string>> GetCurrentRole()
+    {
+        var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+        var role = await _userManager.GetRolesAsync(user);
+        return role;
+    }
 
-    private UserDto CreateUserObject(AppUser user)
+    private async Task<UserDto> CreateUserObject(AppUser user)
     {
         return new UserDto
         {
             DisplayName = user.DisplayName,
             Username = user.UserName,
-            Token = _tokenService.CreateToken(user)
+            Token = await _tokenService.CreateToken(user,_userManager)
         };
 
     }

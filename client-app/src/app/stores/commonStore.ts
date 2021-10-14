@@ -17,7 +17,7 @@ export default class CommonStore{
                     window.localStorage.setItem('jwt', token);
                 }
                 else{
-                    window.localStorage.reomveItem('jwt');
+                    window.localStorage.removeItem('jwt');
                 }
             }
         )

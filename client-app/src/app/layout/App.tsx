@@ -10,6 +10,7 @@ import LoginForm from '../../features/users/LoginForm';
 import { useStore } from '../stores/store';
 import { observer } from 'mobx-react-lite';
 import ModalContainer from '../common/modals/ModalContainer';
+import FAQ from '../../features/pages/FAQ';
 
 
 
@@ -30,6 +31,7 @@ function App() {
       <ModalContainer/>
       <NavBar/>
       <Route exact path='/' component={HomePage}></Route>
+      <Route path='/faq' component={FAQ}></Route>
       <Route path='/tickets' component={TicketDashboard}></Route>
       <Route path='/profile' component={Profile}></Route>
       <Route path='/login' component={LoginForm}></Route>

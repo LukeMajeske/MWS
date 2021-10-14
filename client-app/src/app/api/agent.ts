@@ -32,6 +32,7 @@ const Tickets ={
 
 const Account = {
     current: () => requests.get<User>('/account'),
+    currentRole: () => requests.get<string[]>('/account/role'),
     login: (user: UserFormValues) => requests.post<User>('/account/login',user),
     register: (user: UserFormValues) => requests.post<User>('/account/register',user)
 }

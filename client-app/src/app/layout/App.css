@@ -23,6 +23,10 @@ footer{
 .ui.header{
   color:#fff;
 }
+
+.navbar-wrapper{
+  height: var(--clear-menu);
+}
 .ui.menu{
   background-image: linear-gradient(to right,var(--primary-color),var(--primary-light));
   box-shadow: 1px 1px 2px 7px rgba(34,36,38,.15);
@@ -61,7 +65,8 @@ footer{
 /*TICKET DASHBOARD*/
 
 .ticket-dashboard{
-  margin-top: 130px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .ticket-segment{
@@ -131,7 +136,6 @@ footer{
   border-bottom-left-radius:.3rem;
   border-bottom-right-radius:.3rem;
   width: 100%;
-  margin-top: var(--clear-menu);
   padding-bottom: 10px;
 }
 
@@ -202,14 +206,16 @@ footer{
 
 /*Home Page*/
 
-.segment-div, .segment-div-white{
+.segment-div, .ui.segment.segment-div-white{
   background-image:linear-gradient(to bottom right,var(--primary-color),var(--primary-light));
   border-radius: .3rem;
   width: 100%;
   padding: 30px;
+  margin:0px;
+  
 }
 
-.segment-div-white{
+.ui.segment.segment-div-white{
   z-index: 2;
   background-image: none;
   box-shadow: 0 1px 2px 10px rgb(34 36 38 / 15%);
@@ -225,9 +231,9 @@ footer{
 
 /*Profile*/
 
-.ui.header.profile-header{
+/*.ui.header.profile-header{
   margin-top: var(--clear-menu);
-}
+}*/
 
 /*Login Form
 .login-form{
@@ -237,7 +243,23 @@ footer{
 .login-img{
   margin:auto;
 }
+
+/*FAQ*/
+.ui.styled.accordion{
+  width:75%;
+}
+.faq-accordion{
+  margin:auto;
+}
+.accordion.ui.styled.faq-accordion > .title{
+  color: var(--primary-dark);
+  font-size: 2em;
+}
+.accordion.ui.styled.faq-accordion > .title:hover{
+  color: var(--primary-color);
+}
 /*Footer*/
 footer{
   background-image: var(--primary-gradient);
+  bottom:0;
 }

@@ -19,6 +19,7 @@ export default class UserStore{
         try{
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
+            user.role = await agent.Account.currentRole();
 
             runInAction(() => {
                 this.user = user;
@@ -40,6 +41,7 @@ export default class UserStore{
     getUser = async () => {
         try{
             const user = await agent.Account.current();
+            user.role = await agent.Account.currentRole();
             runInAction(() => this.user = user);
 
         }catch(error){
