@@ -38,7 +38,7 @@ export default observer(function NavBar()
             </Menu.Item>
             <Menu.Item>About</Menu.Item>
             <Menu.Item as={NavLink} to='/faq'>F.A.Q</Menu.Item>
-            <Menu.Item>Contact</Menu.Item>
+            <Menu.Item as={NavLink} to='/contact'>Contact</Menu.Item>
             <Menu.Item>Portfolio</Menu.Item>
             {displayProfile()}
             {displayTicketDashboard()}

@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import Email from "../models/email";
 import { Ticket } from "../models/ticket";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
@@ -37,10 +38,14 @@ const Account = {
     register: (user: UserFormValues) => requests.post<User>('/account/register',user)
 }
 
+const Contact = {
+    send: (email: Email) => requests.post('/contact', email)
+}
 
 const agent = {
     Tickets,
-    Account
+    Account,
+    Contact
 }
 
 export default agent;

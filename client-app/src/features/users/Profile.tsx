@@ -5,7 +5,7 @@ import { Button, Grid, Header, Segment } from "semantic-ui-react";
 
 export default function Profile(){
     return(
-        <Segment>
+        <Segment className='profile'>
             <Header className="profile-header" as='h1' style={{color:'black'}}>My Profile</Header>
 
             <Grid>

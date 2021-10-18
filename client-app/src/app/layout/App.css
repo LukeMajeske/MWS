@@ -7,16 +7,29 @@
   --font-size: 1.5em;
   --text-color: white;
   --clear-menu: 119px;
+  --footer-height:150px;
 }
 body{
   background-color:lightgrey;
 }
 
+#page-container{
+  position: relative;
+  min-height:100vh;
+}
+
+#content-wrapper{
+  padding-bottom: var(--footer-height);
+}
+
 footer{
+  position: absolute;
   z-index:0;
-  background-color: transparent;
+  width:100%;
+  background-image: var(--primary-gradient);
+  bottom:0;
   /*box-shadow: 0px 0px 0px 10px rgba(34,36,38,.15);*/
-  min-height: 200px;
+  min-height: var(--footer-height);
 }
 
 
@@ -257,9 +270,4 @@ footer{
 }
 .accordion.ui.styled.faq-accordion > .title:hover{
   color: var(--primary-color);
-}
-/*Footer*/
-footer{
-  background-image: var(--primary-gradient);
-  bottom:0;
 }
