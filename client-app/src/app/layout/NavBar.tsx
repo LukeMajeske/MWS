@@ -16,17 +16,15 @@ export default observer(function NavBar()
             return(<Menu.Item as={NavLink} to='/profile'>Profile</Menu.Item>);
         }
     }
-    function displayTicketDashboard(){
+    function displaySuperAdmin(){
         if(userStore.isLoggedIn){
             let roles = userStore.user.role;
-            return(roles.map(role=>{
-                if(role === "SuperAdmin"){
-                    return(<Menu.Item as={NavLink} to='/tickets'>Ticket Dashboard</Menu.Item>);
-                }
-                else{
-                    return null;
-                }
-            }));
+            if(roles.includes("SuperAdmin")){
+                return(<>
+                    <Menu.Item as={NavLink} to='/tickets'>Ticket Dashboard</Menu.Item>
+                    <Menu.Item as={NavLink} to='/clientManager'>Client Manager</Menu.Item>
+                </>);
+            }
         }
     }
 
@@ -41,7 +39,7 @@ export default observer(function NavBar()
             <Menu.Item as={NavLink} to='/contact'>Contact</Menu.Item>
             <Menu.Item>Portfolio</Menu.Item>
             {displayProfile()}
-            {displayTicketDashboard()}
+            {displaySuperAdmin()}
             {!userStore.isLoggedIn ? (
             <Menu.Item position='right'>
                 <Button className='login-btn' onClick={() => modalStore.openModal(<LoginForm/>)} positive>Client Login</Button>

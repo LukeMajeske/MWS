@@ -31,10 +31,22 @@ namespace Application.Tickets
                 .ThenInclude(u => u.AppUser)
                 .ToListAsync();
 
-
                 var ticketsDto = _mapper.Map<List<TicketDto>>(tickets);
 
-                return ticketsDto;
+                var ticketsDto_withusers = new List<TicketDto>();
+
+                ticketsDto.ForEach(async (ticket) => {
+                    if(ticket.User.Count == 0){
+                        var del_ticket = await _context.Tickets.FindAsync(ticket.Id);
+                        _context.Tickets.Remove(del_ticket);
+                    }
+                    else{
+                        ticketsDto_withusers.Add(ticket);
+                    }
+                    
+                });
+
+                return ticketsDto_withusers;
 
             }
         }

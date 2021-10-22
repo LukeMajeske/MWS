@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import Email from "../models/email";
 import { Ticket } from "../models/ticket";
-import { User, UserFormValues } from "../models/user";
+import { User, UserFormValues, UserSimple } from "../models/user";
 import { store } from "../stores/store";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
@@ -35,7 +35,9 @@ const Account = {
     current: () => requests.get<User>('/account'),
     currentRole: () => requests.get<string[]>('/account/role'),
     login: (user: UserFormValues) => requests.post<User>('/account/login',user),
-    register: (user: UserFormValues) => requests.post<User>('/account/register',user)
+    register: (user: UserFormValues) => requests.post<User>('/account/register',user),
+    allClients: () => requests.get<UserSimple[]>('/account/allusers'),
+    deleteUser: (id:string) => requests.del<void>(`/account/${id}`)
 }
 
 const Contact = {

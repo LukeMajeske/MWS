@@ -12,6 +12,7 @@ import { observer } from 'mobx-react-lite';
 import ModalContainer from '../common/modals/ModalContainer';
 import FAQ from '../../features/pages/FAQ';
 import Contact from '../../features/pages/Contact';
+import ClientManager from '../../features/users/clientManager/ClientManager';
 
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route exact path='/' component={HomePage}></Route>
           <Route path='/faq' component={FAQ}></Route>
           <Route path='/tickets' component={TicketDashboard}></Route>
+          <Route path='/clientManager' component={ClientManager}></Route>
           <Route path='/contact' component={Contact}></Route>
           <Route path='/profile' component={Profile}></Route>
           <Route path='/login' component={LoginForm}></Route>

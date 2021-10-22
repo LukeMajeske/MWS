@@ -10,7 +10,7 @@ interface Props{
 }
 
 export default function MyTextArea(props:Props){
-    const[field,meta] = useField(props.name);
+    const[field] = useField(props.name);
     return(
         <Form.Field>
             <label>{props.label}</label>

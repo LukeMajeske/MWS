@@ -15,6 +15,8 @@ namespace Persistence
 
         public DbSet<TicketUserRelationship> TicketUserRelationships {get; set;}
 
+        public DbSet<Website> Website {get; set;}
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -30,10 +32,16 @@ namespace Persistence
                 .HasOne(t => t.Ticket)
                 .WithMany(u => u.TicketUser)
                 .HasForeignKey(tu => tu.TicketId);
+            
+            //User to Website
+            builder.Entity<UserWebsite>(x => x.HasKey(uw => new{uw.AppUserId, uw.WebsiteId}));
+
+            builder.Entity<UserWebsite>()
+            .HasOne(u => u.AppUser)
+            .WithMany(w => w.Websites)
+            .HasForeignKey(uw => uw.AppUserId);
 
 
-            builder.Entity<AppUser>()
-            .HasOne(r => r.Role);
         }
     }
 }

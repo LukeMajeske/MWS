@@ -1,9 +1,32 @@
-import React from "react";
+import { JSXElement } from "@babel/types";
+import { observer } from "mobx-react-lite";
+import React, { useEffect } from "react";
 import { Button, Grid, Header, Segment } from "semantic-ui-react";
+import { useStore } from "../../app/stores/store";
+import WebsiteItem from "./WebsiteItem";
 
 
 
-export default function Profile(){
+export default observer(function Profile(){
+    const {userStore} = useStore();
+    const {user} = userStore;
+
+    useEffect(() => {
+        if(user == null){
+            userStore.getUser();
+        }
+    },[user]);
+
+    function displayWebsites(){
+        var websites:JSX.Element[] = [];
+        if(user == null){
+            return websites;
+        }
+        console.log(user);
+        user.websites.forEach(site => websites.push(<WebsiteItem key={site.id} website={site}></WebsiteItem>));
+
+        return websites;
+    }
     return(
         <Segment className='profile'>
             <Header className="profile-header" as='h1' style={{color:'black'}}>My Profile</Header>
@@ -20,6 +43,9 @@ export default function Profile(){
                 <Grid.Column width='8'>
                     <Segment raised>
                         <Header as='h1' style={{color:'black'}}>My Websites</Header>
+                        <Segment.Group>
+                            {displayWebsites()}
+                        </Segment.Group>
                     </Segment>
 
                 </Grid.Column>
@@ -28,4 +54,4 @@ export default function Profile(){
         </Segment>
         
     )
-}
+})

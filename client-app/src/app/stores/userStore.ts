@@ -1,11 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
-import { User, UserFormValues } from "../models/user";
+import { User, UserFormValues, UserSimple } from "../models/user";
 import { store } from "./store";
 import {history} from "../.."
 
 export default class UserStore{
     user: User | null = null;
+    clientManager = new Map<string, UserSimple>();
 
     constructor(){
         makeAutoObservable(this)
@@ -44,6 +45,31 @@ export default class UserStore{
             user.role = await agent.Account.currentRole();
             runInAction(() => this.user = user);
 
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    getClients = async () => {
+        try{
+            var clients = await agent.Account.allClients();
+            this.setClients(clients);
+
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    setClients = async (clients:UserSimple[]) => {
+        clients.forEach(client =>{
+            this.clientManager.set(client.id, client);
+        });
+    }
+
+    deleteUser = async (id:string) => {
+        try{
+            await agent.Account.deleteUser(id);
+            console.log("user deleted!");
         }catch(error){
             console.log(error);
         }
