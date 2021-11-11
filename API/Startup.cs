@@ -24,6 +24,9 @@ using Application.Interfaces;
 using Infrastructure.Security;
 using Domain;
 using Microsoft.AspNetCore.Identity;
+using FluentValidation.AspNetCore;
+using API.Middleware;
+using API.SignalR;
 
 namespace API
 {
@@ -45,6 +48,8 @@ namespace API
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 opt.Filters.Add(new AuthorizeFilter(policy));
+            }).AddFluentValidation(config => {
+                config.RegisterValidatorsFromAssemblyContaining<Create>();
             });
             services.AddSwaggerGen(c =>
             {
@@ -58,7 +63,10 @@ namespace API
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => 
                 {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+                    policy.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .WithOrigins("http://localhost:3000");
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
@@ -68,14 +76,16 @@ namespace API
             services.AddIdentityServices(_config);
 
             services.AddScoped<IUserAccessor, UserAccessor>();
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
@@ -93,6 +103,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
 

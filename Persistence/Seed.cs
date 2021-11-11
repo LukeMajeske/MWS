@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Identity;
 namespace Persistence
 {
     public class Seed
-    {
+    {  
         public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, 
         RoleManager<IdentityRole> roleManager)
-        {
+        {   
+
             if(!roleManager.Roles.Any()){
                 var userRoles = new List<IdentityRole>
                 {
@@ -73,6 +74,11 @@ namespace Persistence
             };
 
             await context.Tickets.AddRangeAsync(tickets);
+
+            foreach(var entity in context.TicketComments){
+                context.TicketComments.Remove(entity);
+            }
+
             await context.SaveChangesAsync();
         } 
 

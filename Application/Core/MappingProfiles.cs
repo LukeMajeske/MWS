@@ -1,4 +1,5 @@
 using System.Linq;
+using Application.Comments;
 using Application.Tickets;
 using AutoMapper;
 using Domain;
@@ -25,6 +26,9 @@ namespace Application.Core
 
             CreateMap<AppUser, Profiles.UserSimpleDto>()
                 .ForMember(d => d.Websites, o => o.MapFrom(s => s.Websites));
+
+            CreateMap<TicketComment, TicketCommentDto>()
+                .ForMember(d => d.Username, o => o.MapFrom(s => s.Author.UserName));
 
 
         }

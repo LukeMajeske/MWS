@@ -18,7 +18,7 @@ export default function WebsiteItem({website}:Props){
             <Header as="h3" style={{color:"black"}}>{website.url}</Header>
             <Progress percent={website.progress} progress color="green"/>
             <Button positive>Progress Notes</Button>
-            <Button color='blue' onClick={() => modalStore.openModal(<TicketForm/>)} floated='right'>Create Ticket</Button>
+            <Button color='blue' onClick={() => modalStore.openModal(<TicketForm url={website.url}/>)} floated='right'>Create Ticket</Button>
 
         </Segment>
     )

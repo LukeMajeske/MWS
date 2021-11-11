@@ -19,10 +19,12 @@ export default observer(function Profile(){
 
     function displayWebsites(){
         var websites:JSX.Element[] = [];
-        if(user == null){
+        if(user== null){
             return websites;
         }
-        console.log(user);
+        if(user.websites == null){
+            return websites;
+        }
         user.websites.forEach(site => websites.push(<WebsiteItem key={site.id} website={site}></WebsiteItem>));
 
         return websites;

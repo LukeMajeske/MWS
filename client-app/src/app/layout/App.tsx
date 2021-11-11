@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import './App.css';
 import TicketDashboard from '../../features/tickets/dashboard/TicketDashboard';
 import NavBar from './NavBar';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
 import Footer from './Footer';
 import Profile from '../../features/users/Profile';
@@ -13,6 +13,8 @@ import ModalContainer from '../common/modals/ModalContainer';
 import FAQ from '../../features/pages/FAQ';
 import Contact from '../../features/pages/Contact';
 import ClientManager from '../../features/users/clientManager/ClientManager';
+import { ToastContainer } from 'react-toastify';
+import NotFound from '../../features/errors/NotFound';
 
 
 
@@ -31,19 +33,26 @@ function App() {
   return (
     <Fragment>
       <ModalContainer/>
-      <div id='page-container'>
+      <ToastContainer position='bottom-right' hideProgressBar/>
         <NavBar/>
-        <div id='content-wrapper'>
-          <Route exact path='/' component={HomePage}></Route>
-          <Route path='/faq' component={FAQ}></Route>
-          <Route path='/tickets' component={TicketDashboard}></Route>
-          <Route path='/clientManager' component={ClientManager}></Route>
-          <Route path='/contact' component={Contact}></Route>
-          <Route path='/profile' component={Profile}></Route>
-          <Route path='/login' component={LoginForm}></Route>
+        <div id='page-container'>
+          <div id='content-wrapper'>
+              <Switch>
+                <Route exact path='/' component={HomePage}></Route>
+                <Route path='/faq' component={FAQ}></Route>
+                <Route path='/tickets' component={TicketDashboard}></Route>
+                <Route path='/clientManager' component={ClientManager}></Route>
+                <Route path='/contact' component={Contact}></Route>
+                <Route path='/profile' component={Profile}></Route>
+                <Route path='/login' component={LoginForm}></Route>
+                <Route component={NotFound}></Route>
+              </Switch>
+            </div>
+            <div>
+            <Footer/>
+            </div>
         </div>
-        <Footer/>
-      </div>
+
     </Fragment>
   );
 }

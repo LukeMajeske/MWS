@@ -1,4 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+import { date } from "yup";
 import Email from "../models/email";
 import { Ticket } from "../models/ticket";
 import { User, UserFormValues, UserSimple } from "../models/user";
@@ -13,6 +15,25 @@ axios.interceptors.request.use((config) => {
     if (token) config.headers.Authorization = `Bearer ${token}`;
 
     return config;
+}, (error:AxiosError) => {
+    const{data, status} = error.response!;
+
+    switch(status){
+        case 400:
+            if(data.errors){
+                const modalStateErrors = [];
+                for(const key in data.errors){
+                    if(data.errors[key]){
+                        modalStateErrors.push(data.errors[key]);
+                    }
+                }
+                throw modalStateErrors.flat();
+            }
+            else{
+                toast.error(data)
+            }
+            break;
+    }
 })
 
 

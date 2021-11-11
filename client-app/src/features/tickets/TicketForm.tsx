@@ -4,54 +4,43 @@ import { Button, Header } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
 import {v4 as uuid} from "uuid";
 import MyTextInput from "../../app/common/form/MyTextInput";
+import { values } from "mobx";
 
+interface Props{
+    url: string;
+}
 
-export default function TicketForm(){
+export default function TicketForm({url}:Props){
     const {ticketStore} = useStore();
-    const {createTicket,ticketRegistry} = ticketStore;
-
-    const [ticket, setTicket] = useState({
-        id: '',
-        date: '',
-        username: '',
-        site: '',
-        subject: '',
-        description: ''
-    })
+    const {createTicket} = ticketStore;
     
-    useEffect(() => {
-        ticketStore.loadTickets();
-    },[ticketStore])
-    
-    //const {tickets} = ticketStore;
-    
-    function handleSubmit(){
+    function ticketSubmit(ticket){
         const newTicket ={
             ...ticket,
             id:uuid(),
     };
-    
-        //console.log(newTicket);
+        console.log(newTicket);
         createTicket(newTicket);
-        ticketStore.loadTickets();
     }
-    
-    function handleChange(event: ChangeEvent<HTMLFormElement>){
-        const {name,value} = event.target;
-        setTicket({...ticket,[name]:value});
-    }
-
-
+    let curDate = new Date();
     return(
-        <Formik initialValues = {{email: ''}} onSubmit={values => console.log(values)}>
-            <Form onSubmit={handleSubmit} onChange={handleChange} autoComplete='off'>
+        <Formik 
+            initialValues = {{
+                id: '',
+                date: curDate.toISOString(),
+                username: '',
+                site: url,
+                subject: '',
+                description: ''
+            }} 
+            onSubmit={values => ticketSubmit(values)}>
+            {({handleSubmit}) => (
+            <Form onSubmit={handleSubmit}  autoComplete='off'>
                 <Header as='h1' style={{color:'black'}}>Create Ticket</Header>
-                <MyTextInput type='date' placeholder='User' name='date'/>
                 <MyTextInput placeholder='Subject' name='subject'/>
-                <MyTextInput placeholder='Site' name='site'/>
                 <MyTextInput placeholder='Description' name='description'/>
                 <Button positive type='submit'>Submit</Button>
-            </Form>
+            </Form>)}
         </Formik>
     )
 }

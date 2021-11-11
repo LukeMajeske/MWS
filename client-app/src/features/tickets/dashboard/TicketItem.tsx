@@ -3,6 +3,8 @@ import React, { SyntheticEvent } from "react";
 import { Button, Divider, Item, Segment } from "semantic-ui-react";
 import { Ticket } from "../../../app/models/ticket";
 import { useStore } from "../../../app/stores/store";
+import TicketComments from "./TicketComments";
+
 
 interface Props{
     ticket: Ticket;
@@ -43,7 +45,7 @@ export default observer(function TicketItem({ticket}: Props)
                         <Button negative onClick={(e)=>{handleTicketDelete(e,ticket.id)}}>Delete</Button>
                         <Button color='blue' floated='right'>Archive</Button>
                     </Item.Content>
-
+                    <TicketComments ticketId={ticket.id}/>
                 </Item>
             </Segment>
         </Segment.Group>
