@@ -1,10 +1,11 @@
 import React from "react";
-import { Header} from "semantic-ui-react";
+import {Image} from "semantic-ui-react";
 
 export default function Footer(){
     return(
         <footer>
-            <Header as='h1' style={{color:'black'}}>Footer</Header>
+            <Image src={'/assets/mws-logo-512.png'} size='mini'/>
+            <p>Copyright 2021 MWS, All Rights Reserved</p>
         </footer>
 
     )

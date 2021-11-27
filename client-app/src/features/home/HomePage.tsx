@@ -7,6 +7,7 @@ import SlideShow from "./SlideShow";
 export default function HomePage(){
     return(
         <Fragment>
+            <title>MWS | Home</title>
             <SlideShow/>
             <div className="segment-div">
                 <Header as="h1">Meet Luke!</Header>

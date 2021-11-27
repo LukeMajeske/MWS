@@ -11,8 +11,9 @@ export default function FAQ(){
     }
 
     return(
-        <Segment className='segment-div-white'>
-            <Header as='h1' style={{color:'black', margin:'auto'}}>F.A.Q</Header>
+        <Segment className='ui segment content-container'>
+            <title>MWS | FAQ</title>
+            <Header as='h1' className='black-header'>F.A.Q</Header>
             <Accordion styled className='faq-accordion'>
                 <Accordion.Title index={0} onClick={handleClick}>
                     <Icon name="dropdown"/>

@@ -13,6 +13,10 @@ body{
   background-color:lightgrey;
 }
 
+.ui.header.black-header{
+  color:black;
+}
+
 #page-container{
   height:auto;
   display:flex;
@@ -37,15 +41,12 @@ body{
 }
 
 footer{
-  /*
-  position: absolute;
-  bottom:0;
-  */
   align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width:100%;
   background-image: var(--primary-gradient);
-  
-  /*box-shadow: 0px 0px 0px 10px rgba(34,36,38,.15);*/
   height: var(--footer-height);
 }
 
@@ -77,6 +78,12 @@ footer{
   color: var(--text-color) !important;
 }
 
+/*Content Container*/
+.ui.segment.content-container{
+  flex:1;
+  display:flex;
+  flex-direction: column;
+}
 /*Client Login Button NavBar*/
 
 .ui.menu .login-btn{
@@ -88,10 +95,28 @@ footer{
 }
 
 /*CONTACT FORM*/
-.ui.segment.contact-form{
+.ui.segment.contact-form-container{
   flex:1;
-  padding: auto;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  height:auto;
 }
+
+.ui.segment.contact-form-segment{
+  width:60%;
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  margin:auto;
+}
+
+.ui.form.contact-form{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+}
+
 
 
 
@@ -230,18 +255,24 @@ footer{
 
 .port-slide {
   display: inline-block;
-  
-
   height: 300px;
   width: 300px;
   transition: margin ease 2000ms;
 }
 
-/*Home Page*/
-
-.segment-content{
-  height:inherit;
+.ui.positive.button.right-btn{
+  position: absolute;
+  bottom:50%;
+  right:2%;
 }
+
+.ui.positive.button.left-btn{
+  position: absolute;
+  bottom:50%;
+  left:1%;
+}
+
+/*Home Page*/
 
 .segment-div, .ui.segment.segment-div-white{
   background-image:linear-gradient(to bottom right,var(--primary-color),var(--primary-light));
@@ -283,10 +314,10 @@ footer{
 
 /*FAQ*/
 .ui.styled.accordion{
-  width:75%;
+  width:95%;
 }
 .faq-accordion{
-  margin:auto;
+  
 }
 .accordion.ui.styled.faq-accordion > .title{
   color: var(--primary-dark);

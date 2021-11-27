@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { date } from "yup";
 import Email from "../models/email";
 import { Ticket } from "../models/ticket";
+import { Transaction } from "../models/transaction";
 import { User, UserFormValues, UserSimple } from "../models/user";
 import { store } from "../stores/store";
 
@@ -55,6 +55,7 @@ const Tickets ={
 const Account = {
     current: () => requests.get<User>('/account'),
     currentRole: () => requests.get<string[]>('/account/role'),
+    getTransactions: (username:string) => requests.get<Transaction[]>(`/transaction/${username}`),
     login: (user: UserFormValues) => requests.post<User>('/account/login',user),
     register: (user: UserFormValues) => requests.post<User>('/account/register',user),
     allClients: () => requests.get<UserSimple[]>('/account/allusers'),

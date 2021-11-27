@@ -3,10 +3,12 @@ import agent from "../api/agent";
 import { User, UserFormValues, UserSimple } from "../models/user";
 import { store } from "./store";
 import {history} from "../.."
+import { Transaction } from "../models/transaction";
 
 export default class UserStore{
     user: User | null = null;
     clientManager = new Map<string, UserSimple>();
+    transactionHistory:Transaction[] = [];
 
     constructor(){
         makeAutoObservable(this)
@@ -64,6 +66,19 @@ export default class UserStore{
         clients.forEach(client =>{
             this.clientManager.set(client.id, client);
         });
+    }
+
+    setTransactions = async () => {
+        try{
+            if(this.user){
+                const transactionHistory = await agent.Account.getTransactions(this.user.username);
+                runInAction(() => this.transactionHistory = transactionHistory);
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+        
     }
 
     deleteUser = async (id:string) => {

@@ -15,5 +15,7 @@ namespace Domain
         public ICollection<TicketUserRelationship> Tickets { get; set; }
 
         public ICollection<UserWebsite> Websites {get; set;}
+
+        public ICollection<UserPayment> Transactions { get; set; }
     }
 }

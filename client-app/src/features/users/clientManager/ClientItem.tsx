@@ -1,6 +1,5 @@
 import React, { SyntheticEvent } from "react";
 import { Button, Segment } from "semantic-ui-react";
-import { setConstantValue } from "typescript";
 import { UserSimple } from "../../../app/models/user";
 import { useStore } from "../../../app/stores/store";
 

@@ -18,6 +18,8 @@ namespace Persistence
         public DbSet<Website> Website {get; set;}
 
         public DbSet<TicketComment> TicketComments{get; set;}
+
+        public DbSet<UserPayment> UserPayments{get; set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -46,6 +48,10 @@ namespace Persistence
             .HasOne(t => t.Ticket)
             .WithMany(c => c.Comments)
             .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserPayment>()
+            .HasOne(u => u.User)
+            .WithMany(t => t.Transactions);
         }
     }
 }

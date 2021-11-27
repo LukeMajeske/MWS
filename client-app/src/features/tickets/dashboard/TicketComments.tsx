@@ -1,8 +1,7 @@
 import { Field, FieldProps, Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import React, { useEffect, useState } from "react";
-import { Segment, Comment, Button } from "semantic-ui-react";
-import MyTextArea from "../../../app/common/form/MyTextArea";
+import React, { useEffect} from "react";
+import { Segment, Comment} from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 import * as Yup from 'yup';
 import {formatDistanceToNow} from 'date-fns';
@@ -52,7 +51,6 @@ export default observer(function TicketComments({ticketId}:Props)
     return(
         <Segment clearing>
             <Comment.Group>
-                {getComments()}
                 <Formik
                     onSubmit={(values, {resetForm}) => 
                         commentStore.addComment(values).then(() => resetForm())}
@@ -87,7 +85,7 @@ export default observer(function TicketComments({ticketId}:Props)
                     )}
                     
                 </Formik>
-
+                {getComments()}
             </Comment.Group>
         </Segment>
     )

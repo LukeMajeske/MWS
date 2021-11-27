@@ -77,11 +77,6 @@ function Portfolio(){
       }
     
     function handleTransitionEnd(){
-        /*if(index === 2){
-            setTransitionEnabled(false);
-            console.log('Set FALSE');
-        }*/
-        //console.log(index, direction);
         if(direction === -1){//move to the right
             dispatch({type:ACTIONS.ADDSLIDELAST, ind:index});
             dispatch({type:ACTIONS.DELSLIDESTART});
@@ -98,10 +93,6 @@ function Portfolio(){
     }
 
     function resetTransition(){
-        /*if(index === 0){
-            setTransitionEnabled(true);
-            console.log('Set TRUE');
-        }*/
         setTransitionEnabled(true);
     }
 
@@ -144,9 +135,9 @@ function Portfolio(){
                 >
                     {slides}
                 </div>
+                <Button className="left-btn" onClick={left} positive>Left</Button>
+                <Button className="right-btn" onClick={right}positive>Right</Button>
             </div>
-            <Button onClick={left} positive>Left</Button>
-            <Button onClick={right}positive>Right</Button>
         </div>
     )
 }

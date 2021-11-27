@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Stripe.net" Version="39.77.0" />
   </ItemGroup>
 
   <PropertyGroup>

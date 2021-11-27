@@ -27,6 +27,7 @@ export default observer(function ClientManager(){
 
     return(
         <Segment>
+            <title>MWS | Client Dashboard</title>
             {returnClients()}
         </Segment>
     )

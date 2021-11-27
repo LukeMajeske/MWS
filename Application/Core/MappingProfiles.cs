@@ -1,6 +1,7 @@
 using System.Linq;
 using Application.Comments;
 using Application.Tickets;
+using Application.Transactions;
 using AutoMapper;
 using Domain;
 
@@ -29,6 +30,9 @@ namespace Application.Core
 
             CreateMap<TicketComment, TicketCommentDto>()
                 .ForMember(d => d.Username, o => o.MapFrom(s => s.Author.UserName));
+
+            CreateMap<UserPayment, TransactionDto>()
+                .ForMember(d => d.Username, o => o.MapFrom(s => s.User.UserName));
 
 
         }

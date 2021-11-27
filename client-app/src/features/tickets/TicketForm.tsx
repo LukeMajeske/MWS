@@ -1,10 +1,10 @@
 import { Form, Formik } from "formik";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React from "react";
 import { Button, Header } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
 import {v4 as uuid} from "uuid";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import { values } from "mobx";
+
 
 interface Props{
     url: string;

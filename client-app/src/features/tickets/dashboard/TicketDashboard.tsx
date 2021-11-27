@@ -25,7 +25,6 @@ export default observer(function TicketDashboard()
         ticketStore.loadTickets();
     },[ticketStore])
 
-    //const {tickets} = ticketStore;
 
     function handleSubmit(){
         const newTicket ={
@@ -53,6 +52,7 @@ export default observer(function TicketDashboard()
 
     return(
         <Fragment>
+            <title>MWS | Dashboard</title>
             <div className='ticket-dashboard'>
                 <Grid>
                     <GridColumn width='10'>

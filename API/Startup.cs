@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Identity;
 using FluentValidation.AspNetCore;
 using API.Middleware;
 using API.SignalR;
+using Infrastructure.Services;
 
 namespace API
 {
@@ -76,6 +77,8 @@ namespace API
             services.AddIdentityServices(_config);
 
             services.AddScoped<IUserAccessor, UserAccessor>();
+
+            services.AddScoped<IPaymentService, PaymentService>();
 
             services.AddSignalR();
         }
