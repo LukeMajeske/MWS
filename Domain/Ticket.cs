@@ -10,7 +10,12 @@ namespace Domain
 
         public DateTime Date {get; set;} = DateTime.UtcNow;
 
-        public string Username { get; set; }
+        public DateTime DueDate{ get; set; }
+
+        //Should be in a separate table
+        // public DateTime LastUpdated {get; set;} = DateTime.UtcNow;
+
+        // public AppUser UpdatedBy { get; set; }
 
         public string Site { get; set; }
 
@@ -18,7 +23,12 @@ namespace Domain
 
         public string Description{get; set;}
 
-        public ICollection<TicketUserRelationship> TicketUser{get; set;} = new List<TicketUserRelationship>();
+        public string Status {get; set;} = "OPEN";
+
+        public string Priority {get; set;} = "Low";
+
+
+        public ICollection<TicketUser> TicketUser{get; set;} = new List<TicketUser>();
 
         public ICollection<TicketComment> Comments { get; set; } = new List<TicketComment>();
         //public string Status { get; set; }

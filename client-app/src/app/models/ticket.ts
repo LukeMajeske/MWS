@@ -8,6 +8,8 @@ export interface Ticket{
     site: string;
     subject: string;
     description: string;
-    user?: Profile[];
+    priority:string;
+    status:string;
+    users?: Profile[];
     //status: string;
 }

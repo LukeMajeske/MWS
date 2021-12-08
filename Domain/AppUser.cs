@@ -12,9 +12,9 @@ namespace Domain
 
         public IdentityRole Role {get; set;}
         //public IdentityUserRole<string> Role {get; set;}
-        public ICollection<TicketUserRelationship> Tickets { get; set; }
+        public ICollection<TicketUser> Tickets { get; set; }
 
-        public ICollection<UserWebsite> Websites {get; set;}
+        public ICollection<Website> Websites {get; set;}
 
         public ICollection<UserPayment> Transactions { get; set; }
     }

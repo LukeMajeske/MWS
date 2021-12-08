@@ -4,22 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace Persistence
 {
     public class Seed
-    {  
-        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, 
+    {
+
+        public static async Task SeedData(IConfigurationRoot _config, DataContext context, UserManager<AppUser> userManager, 
         RoleManager<IdentityRole> roleManager)
         {   
-
             if(!roleManager.Roles.Any()){
                 var userRoles = new List<IdentityRole>
                 {
                     new IdentityRole {Name = "SuperAdmin"},
                     new IdentityRole {Name = "Admin"},
-                    new IdentityRole {Name = "Client"},
-                    new IdentityRole {Name = "User"}
+                    new IdentityRole {Name = "Client"}
                 };
 
                 foreach (var role in userRoles){
@@ -27,61 +27,46 @@ namespace Persistence
                 }
 
             }
+            //Create Test Users
             if(!userManager.Users.Any())
             {
                 var users = new List<AppUser>
                 {
-                    new AppUser{DisplayName = "Bob", UserName = "bobbieboy", Email="bob@test.com"},
-                    new AppUser{DisplayName = "Monica", UserName = "ItMeMon", Email="monica@test.com"},
-                    new AppUser{DisplayName = "P-Diddy", UserName = "pdiddles", Email="p@diddy.com"},
-                    new AppUser{DisplayName = "Smackelmore", UserName = "smackelmore", Email="smack@smack.com"},
+                    new AppUser{DisplayName = "TestClient", UserName = "testclient", Email="testclient@test.com"},
 
                 };
 
+
                 foreach (var user in users)
                 {
-                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                    var result = await userManager.CreateAsync(user, "Pa$$w0rd");
+
+                    if(result.Succeeded){
+                        await userManager.AddToRoleAsync(user,"Client");
+                    }
                 }
-
-
             }
 
 
-            if(context.Tickets.Any()) return;
-
-            var tickets = new List<Ticket>{
-                new Ticket{
-                   Date = DateTime.Now,
-                   Username = "P-Diddy",
-                   Site = "P-Diddles.com",
-                   Subject = "Site is broken",
-                   Description = "A button doesn't work anymore"
-                },
-                new Ticket{
-                   Date = DateTime.Now.AddDays(-2),
-                   Username = "Monica",
-                   Site = "ItMeMonica.com",
-                   Subject = "Change Color of Button",
-                   Description = "Change color of home button to green"
-                },
-                new Ticket{
-                   Date = DateTime.Now.AddDays(-10),
-                   Username = "tootiefroots12",
-                   Site = "Beutify.com",
-                   Subject = "Restyle my site",
-                   Description = "Let's set up a meeting, I would like my site to look different"
-                }
+             //Create Super Admin
+            var superadmin = new AppUser{
+                UserName = _config["SuperAdmin:SuperAdminUsername"],
+                Email = _config["SuperAdmin:SuperAdminEmail"]
             };
 
-            await context.Tickets.AddRangeAsync(tickets);
+            string superadminPWD = _config["SuperAdmin:SuperAdminPassword"];
+            var superadmin_exists = await userManager.FindByEmailAsync(superadmin.Email);
 
-            foreach(var entity in context.TicketComments){
-                context.TicketComments.Remove(entity);
+            if(superadmin_exists == null){
+                var result = await userManager.CreateAsync(superadmin, superadminPWD);
+                if(result.Succeeded){
+                    await userManager.AddToRoleAsync(superadmin,"SuperAdmin");
+                }
             }
 
-            await context.SaveChangesAsync();
-        } 
 
+            await context.SaveChangesAsync();
+        }
         
     }
 }

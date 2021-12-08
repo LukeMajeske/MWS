@@ -2,6 +2,14 @@
 {
     "version": "0.2.0",
     "configurations": [
+        {
+            "name": "Launch to Chrome",
+            "url":"http://localhost:3000",
+            "request": "launch",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}"
+        },
+
         
         {
             // Use IntelliSense to find out which attributes exist for C# debugging

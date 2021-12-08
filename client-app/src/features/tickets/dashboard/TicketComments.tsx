@@ -34,7 +34,7 @@ export default observer(function TicketComments({ticketId}:Props)
             comments.push(
                     <Comment key={comment.id}>
                         <Comment.Content>
-                            <Comment.Author>{comment.username}</Comment.Author>
+                            <Comment.Author as='a'>{comment.username}</Comment.Author>
                             <Comment.Metadata>
                                 <div>{formatDistanceToNow(comment.createAt)} ago</div>
                             </Comment.Metadata>

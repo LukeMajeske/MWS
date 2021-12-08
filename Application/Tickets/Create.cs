@@ -39,15 +39,16 @@ namespace Application.Tickets
             {
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
 
-                var ticketuser = new TicketUserRelationship
+                var ticketuser = new TicketUser
                 {
                     AppUser = user,
-                    Ticket = request.Ticket
+                    Ticket = request.Ticket,
+                    isOwner = true,
+                    isWatching = true
                 };
 
                 request.Ticket.TicketUser.Add(ticketuser);
-                request.Ticket.Username = user.UserName;
-
+                
                 await _context.Tickets.AddAsync(request.Ticket);
 
                 var result = await _context.SaveChangesAsync() > 0;

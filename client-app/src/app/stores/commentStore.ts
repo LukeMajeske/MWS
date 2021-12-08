@@ -13,7 +13,7 @@ export default class CommentStore{
 
     createHubConnection = (ticketId: string) => {
         this.hubConnection = new HubConnectionBuilder()
-            .withUrl('http://localhost:5000/chat?ticketId='+ ticketId, {
+            .withUrl(process.env.REACT_APP_CHAT_URL + '?ticketId='+ ticketId, {
                 accessTokenFactory: () => store.userStore.user?.token!
             })
             .withAutomaticReconnect()

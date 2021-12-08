@@ -3,25 +3,29 @@ import React, { useEffect } from "react";
 import { Button, Grid, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
 import TransactionHistory from "../payments/TransactionHistory";
+import ProgressFeed from "./ProgressFeed";
 import WebsiteItem from "./WebsiteItem";
 
 
 
 export default observer(function Profile(){
-    const {userStore} = useStore();
+    const {userStore, ticketStore} = useStore();
     const {user} = userStore;
+    const {ticketRegistry} = ticketStore;
 
     useEffect(() => {
         if(user == null){
             userStore.getUser();
         }
-    },[user, userStore]);
+        //Get tickets for currently logged in user
+        ticketStore.loadTickets();
+    },[user, userStore, ticketStore,ticketRegistry]);
 
     function displayWebsites(){
         var websites:JSX.Element[] = [];
         if(user=== null || user.websites === null || user.websites.length === 0){   
             websites.push(<Segment placeholder>
-                <Header className="black-header">No Websites Found</Header>;
+                <Header className="black-header">No Websites Found</Header>
             </Segment>);
             return websites;
         }
@@ -33,7 +37,7 @@ export default observer(function Profile(){
         <Segment className='content-container'>
             <title>MWS | My Profile</title>
             <Header className="profile-header" as='h1' style={{color:'black'}}>My Profile</Header>
-
+            
             <Grid>
                 <Grid.Column width='8'>
                     <Segment raised>
@@ -53,6 +57,7 @@ export default observer(function Profile(){
 
                 </Grid.Column>
             </Grid>
+            <ProgressFeed/>
 
         </Segment>
         

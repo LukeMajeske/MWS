@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -51,8 +52,17 @@ namespace API.Controllers
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
         if (result.Succeeded)
-        {
-            return await CreateUserObject(user);
+        {   
+            var userDto = await CreateUserObject(user);
+            
+            user.Websites = await _context.Website
+            .Where(w => w.User.Id == user.Id)
+            .ToListAsync(); 
+
+            userDto.Websites = _mapper.Map<IList<Application.Profiles.WebsiteDto>>(user.Websites);
+            userDto.Role = await _userManager.GetRolesAsync(user);
+
+            return userDto;
         }
 
         return Unauthorized();
@@ -90,17 +100,16 @@ namespace API.Controllers
     }
 
     [HttpPost("website")]
-    public async Task<ActionResult> CreateWebsite(Website site){
-        var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
-        var userwebsite = new UserWebsite{
-            AppUserId = user.Id,
-            AppUser = user,
-            WebsiteId = site.Id,
-            Website = site
-        };
-        site.User.Add(userwebsite);
+    public async Task<ActionResult> CreateWebsite(WebsiteDto site){
+        var new_site = _mapper.Map<Website>(site);
 
-        await _context.Website.AddAsync(site);
+        var user = await _userManager.FindByIdAsync(site.userId);
+
+        if(user == null) return null;
+        
+        new_site.User = user;
+
+        await _context.Website.AddAsync(new_site);
 
         await _context.SaveChangesAsync();
 
@@ -113,17 +122,14 @@ namespace API.Controllers
     {
         var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
-        var result = await _userManager.Users
-        .Include(u => u.Websites)
-        .ThenInclude(uw => uw.Website)
-        .ToListAsync();
-
-        user = result.Find(x => x.Id == user.Id);
         var userDto = await CreateUserObject(user);
 
-        var userSimpleDto = _mapper.Map<Application.Profiles.UserSimpleDto>(user);
+        user.Websites = await _context.Website
+        .Where(w => w.User.Id == user.Id)
+        .ToListAsync(); 
+
+        userDto.Websites = _mapper.Map<IList<Application.Profiles.WebsiteDto>>(user.Websites);
         userDto.Role = await _userManager.GetRolesAsync(user);
-        userDto.Websites = userSimpleDto.Websites;
 
         return userDto;
 
@@ -149,17 +155,22 @@ namespace API.Controllers
     public async Task<List<Application.Profiles.UserSimpleDto>> GetAllUsers(){
         var result = await _userManager.Users
         .Include(u => u.Websites)
-        .ThenInclude(uw => uw.Website)
         .ToListAsync();
 
         
         var clients = _mapper.Map<List<Application.Profiles.UserSimpleDto>>(result);
 
 
-        clients.ForEach(async (client) => {
+         /*clients.ForEach(async (client) => {
             var user = await _userManager.FindByIdAsync(client.Id);
             client.Role = await _userManager.GetRolesAsync(user);
-            });
+            });*/
+
+            foreach(var client in clients)
+            {
+                var user = await _userManager.FindByIdAsync(client.Id);
+                client.Role = await _userManager.GetRolesAsync(user);
+            }
 
 
 

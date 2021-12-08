@@ -8,14 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {   
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin,Client")]
     public class TicketsController : BaseApiController
     {
 
         [HttpGet]
-        public async Task<IActionResult> GetTickets()
+        public async Task<IActionResult> GetTickets([FromQuery] TicketParams param)
         {
-            return HandleResult(await Mediator.Send(new List.Query()));
+            return HandleResult(await Mediator.Send(new List.Query{Params = param}));
         }
 
         [HttpGet("{id}")]
@@ -41,6 +41,12 @@ namespace API.Controllers
         public async Task<IActionResult> CreateTicket(Ticket ticket)
         {
             return HandleResult(await Mediator.Send(new Create.Command{Ticket = ticket}));
+        }
+
+        [HttpPut("{id}/watch")]
+        public async Task<IActionResult> UpdateWatchers(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new UpdateWatchers.Command{TicketId = id}));
         }
 
 

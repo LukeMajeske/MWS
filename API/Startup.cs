@@ -59,7 +59,7 @@ namespace API
 
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+                opt.UseNpgsql(_config.GetConnectionString("DefaultConnection"));
             });
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => 
@@ -80,11 +80,15 @@ namespace API
 
             services.AddScoped<IPaymentService, PaymentService>();
 
-            services.AddSignalR();
+            services.AddSignalR(opt => {
+                opt.EnableDetailedErrors = true;
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
@@ -92,10 +96,14 @@ namespace API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
-            await CreateRolls(_config,serviceProvider);
+
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
 
             app.UseCors("CorsPolicy");
 
@@ -107,6 +115,8 @@ namespace API
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("/chat");
+                endpoints.MapHub<ProgressHub>("/progress");
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
 

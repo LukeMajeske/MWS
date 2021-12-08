@@ -124,7 +124,7 @@ function Portfolio(){
 
     return(
         <div className='portfolio segment-div-white' style={{backgroundColor:'white'}}>
-            <Header as='h1' style={{color:'black'}}>Portfolio</Header>
+            <Header as='h1' style={{color:'black'}}>Portfolio(Coming Soon...)</Header>
             <div className='port-slideshow'>
                 <div
                     className="port-slideshowSlider"

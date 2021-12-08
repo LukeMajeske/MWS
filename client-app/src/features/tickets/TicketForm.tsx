@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import React from "react";
 import { Button, Header } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
@@ -19,7 +19,6 @@ export default function TicketForm({url}:Props){
             ...ticket,
             id:uuid(),
     };
-        console.log(newTicket);
         createTicket(newTicket);
     }
     let curDate = new Date();
@@ -31,14 +30,26 @@ export default function TicketForm({url}:Props){
                 username: '',
                 site: url,
                 subject: '',
-                description: ''
+                description: '',
+                priority:'low',
+                status:'open'
             }} 
             onSubmit={values => ticketSubmit(values)}>
             {({handleSubmit}) => (
-            <Form onSubmit={handleSubmit}  autoComplete='off'>
+            <Form className="ui form" onSubmit={handleSubmit}  autoComplete='off'>
                 <Header as='h1' style={{color:'black'}}>Create Ticket</Header>
                 <MyTextInput placeholder='Subject' name='subject'/>
                 <MyTextInput placeholder='Description' name='description'/>
+                <Field as="select" name='priority'>
+                    <option value="low">Low</option>
+                    <option value="med">Medium</option>
+                    <option value="high">High</option>
+                </Field>
+                <Field as="select" name='status'>
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                    <option value="blocked">Blocked</option>
+                </Field>
                 <Button positive type='submit'>Submit</Button>
             </Form>)}
         </Formik>

@@ -12,14 +12,17 @@ namespace Application.Tickets
 
         public DateTime Date {get; set;}
 
-        public string Username { get; set; }
-
         public string Site { get; set; }
 
         public string Subject { get; set; }
 
         public string Description{get; set;}
 
-        public ICollection<Profile> User{get; set;}
+        public string Status {get; set;}
+
+        public string Priority {get; set;}
+
+
+        public ICollection<Profile> Users{get; set;}
     }
 }

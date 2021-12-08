@@ -4,6 +4,7 @@ import { User, UserFormValues, UserSimple } from "../models/user";
 import { store } from "./store";
 import {history} from "../.."
 import { Transaction } from "../models/transaction";
+import { Website } from "../models/website";
 
 export default class UserStore{
     user: User | null = null;
@@ -22,7 +23,6 @@ export default class UserStore{
         try{
             const user = await agent.Account.login(creds);
             store.commonStore.setToken(user.token);
-            user.role = await agent.Account.currentRole();
 
             runInAction(() => {
                 this.user = user;
@@ -80,6 +80,17 @@ export default class UserStore{
         }
         
     }
+
+    createWebsite = async (website:Website) => {
+        try{
+            console.log("Creating website: ",website);
+            await agent.Account.createWebsite(website);
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+    
 
     deleteUser = async (id:string) => {
         try{

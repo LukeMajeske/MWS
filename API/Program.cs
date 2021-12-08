@@ -20,6 +20,10 @@ namespace API
         {
             var host = CreateHostBuilder(args).Build();
 
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional:false)
+                .Build();
+
             using var scope = host.Services.CreateScope();
 
             var services = scope.ServiceProvider;
@@ -29,7 +33,7 @@ namespace API
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                 await context.Database.MigrateAsync();
-                await Seed.SeedData(context, userManager, roleManager);
+                await Seed.SeedData(config,context, userManager, roleManager);
             }catch(Exception ex){
                 var logger = services.GetRequiredService<ILogger<Program>>();
 

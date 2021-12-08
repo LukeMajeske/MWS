@@ -13,6 +13,8 @@ namespace Domain
 
         public string URL { get; set; }
 
-        public ICollection<UserWebsite> User{ get; set; } = new List<UserWebsite>();
+        public AppUser User{ get; set; }
+
+        public ICollection<ProgressNote> ProgressNotes {get; set;} =new List<ProgressNote>();
     }
 }

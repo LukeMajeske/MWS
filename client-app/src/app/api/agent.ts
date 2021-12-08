@@ -3,10 +3,11 @@ import { toast } from "react-toastify";
 import Email from "../models/email";
 import { Ticket } from "../models/ticket";
 import { Transaction } from "../models/transaction";
+import { Website } from "../models/website";
 import { User, UserFormValues, UserSimple } from "../models/user";
 import { store } from "../stores/store";
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -45,17 +46,19 @@ const requests ={
 }
 
 const Tickets ={
-    list: () => requests.get<Ticket[]>('/tickets'),
+    list: (params: URLSearchParams) => axios.get<Ticket[]>('/tickets',{params}).then(responseBody),
     details: (id:string) => requests.get<Ticket>(`/tickets/${id}`),
     update: (ticket: Ticket) => requests.put<void>(`/tickets/${ticket.id}`, ticket),
     create: (ticket: Ticket) => requests.post<void>('/tickets', ticket),
-    delete: (id:string) => requests.del<void>(`/tickets/${id}`)
+    delete: (id:string) => requests.del<void>(`/tickets/${id}`),
+    updateWatchers: (id: string) => axios.put<void>(`/tickets/${id}/watch`).then(responseBody)
 }
 
 const Account = {
     current: () => requests.get<User>('/account'),
     currentRole: () => requests.get<string[]>('/account/role'),
     getTransactions: (username:string) => requests.get<Transaction[]>(`/transaction/${username}`),
+    createWebsite: (website:Website)=> requests.post<Website>("/website", website),
     login: (user: UserFormValues) => requests.post<User>('/account/login',user),
     register: (user: UserFormValues) => requests.post<User>('/account/register',user),
     allClients: () => requests.get<UserSimple[]>('/account/allusers'),

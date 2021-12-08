@@ -3,6 +3,7 @@ import CommentStore from "./commentStore";
 import CommonStore from "./commonStore";
 import ContactStore from "./contactStore";
 import ModalStore from "./modalStore";
+import ProgressStore from "./progressStore";
 import TicketStore from "./ticketStore";
 import UserStore from "./userStore";
 
@@ -13,6 +14,7 @@ interface Store{
     modalStore: ModalStore;
     contactStore: ContactStore;
     commentStore: CommentStore;
+    progressStore: ProgressStore;
 }
 
 
@@ -22,7 +24,8 @@ export const store: Store = {
     commonStore: new CommonStore(),
     modalStore: new ModalStore(),
     contactStore: new ContactStore(),
-    commentStore: new CommentStore()
+    commentStore: new CommentStore(),
+    progressStore: new ProgressStore()
 }
 
 export const StoreContext = createContext(store);
