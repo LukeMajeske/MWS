@@ -23,7 +23,7 @@ namespace API
                 .Build();
 
             var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional:false)
+                .AddJsonFile("appsettings.json", optional:true)
                 .Build();
 
             using var scope = host.Services.CreateScope();
