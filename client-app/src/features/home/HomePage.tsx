@@ -28,7 +28,7 @@ export default function HomePage(){
                                 <div className="my-tools">
 
                                     <Image rounded as="a" href="https://reactjs.org/" size="small" src="../logo512.png"></Image>
-                                    <Image rounded as="a" href="https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet" size="small" src="../assets/NET_Core_logo.png"></Image>
+                                    <Image rounded as="a" href="https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet" size="small" src="../assets/NET_Core_Logo.png"></Image>
                                     <Image rounded as="a" href="https://www.postgresql.org/" size="small" src="../assets/postgresql.png"></Image>
                                 </div>
                             </Segment>
