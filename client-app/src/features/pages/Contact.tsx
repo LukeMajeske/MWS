@@ -1,16 +1,18 @@
 import React from "react";
-import { Container, Grid, Segment} from "semantic-ui-react";
+import { Container, Grid, Header, Segment} from "semantic-ui-react";
 import QuoteForm from "../home/QuoteForm";
 
 export default function Contact(){
     
     return(
             <>
-                <Segment className='contact-form-container'>
+                <Segment raised className='contact-form-container'>
                     <title>MWS | Contact</title>
                     <Grid>
                     <Grid.Column width='8'>
-                        <Container/>
+                        <Segment className="contact-info">
+                            <Header as="h1" content="Hire Me "></Header>
+                        </Segment>
 
                     </Grid.Column>
                         <Grid.Column width='8'>

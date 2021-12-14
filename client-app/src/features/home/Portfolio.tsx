@@ -82,7 +82,7 @@ function Portfolio(){
             dispatch({type:ACTIONS.DELSLIDESTART});
             setIndex((prevIndex) => prevIndex+1 > colors.length - 1 ? 0 : prevIndex + 1);
         }
-        else{//move to the left
+        else if(direction === 1){//move to the left
             dispatch({type:ACTIONS.ADDSLIDESTART, ind:index});
             dispatch({type:ACTIONS.DELSLIDELAST});
             setIndex((prevIndex) => prevIndex-1 < 0 ? colors.length - 1 : prevIndex - 1);  

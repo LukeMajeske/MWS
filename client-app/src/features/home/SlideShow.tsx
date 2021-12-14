@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import website_img from "../assets/website.jpg";
 import client_img from "../assets/client.jpg";
 import QuoteForm from "./QuoteForm";
+import { Header, Segment } from "semantic-ui-react";
 
 //const website_img1 = website_img;
 const images = [website_img, client_img];
@@ -52,7 +53,15 @@ function SlideShow() {
         ))}
       </div>
       <div className='quoteform-div'>
-        <QuoteForm/>
+        <Segment className="welcome-flex">
+          <div className="welcome-container">
+            <Header as="h1"  content="Welcome to Majeske Web Services!"/>
+            <Header as="h2" content="Manage your data with a personalized Web Interface"/>
+          </div>
+          <div className="quoteForm">
+            <QuoteForm/>
+          </div>
+        </Segment>
       </div>
 
       <div className="slideshowDots">
