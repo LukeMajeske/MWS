@@ -30,12 +30,12 @@ export default observer(function NavBar()
 
     return(
         <div className='navbar-wrapper'>
-        <Menu borderless fixed='top'>
+        <Menu  borderless fixed='top'>
             <Menu.Item as={NavLink} to='/' exact>
                 <Image src={'/assets/mws-logo-512.png'} size={"tiny"}></Image>
             </Menu.Item>
             {/*<Menu.Item as={NavLink} to='/faq'>F.A.Q</Menu.Item>*/}
-            <Menu.Item as={NavLink} to='/contact'>Contact</Menu.Item>
+            {/*<Menu.Item as={NavLink} to='/contact'>Contact</Menu.Item>*/}
             <Menu.Item>Portfolio</Menu.Item>
             {displayProfile()}
             {displaySuperAdmin()}

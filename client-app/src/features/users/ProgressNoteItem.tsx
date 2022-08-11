@@ -20,6 +20,7 @@ export default observer(function ProgressNoteItem({websiteId}: Props)
         if (!notes) return progressNotes; 
 
         for(var note of notes){
+            
 
             progressNotes.push(
                     <Comment key={note.id}>

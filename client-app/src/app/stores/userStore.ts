@@ -41,6 +41,13 @@ export default class UserStore{
         history.push('');
     }
 
+    register = async (newUser : UserFormValues) => {
+
+        await agent.Account.register(newUser);
+        this.getClients();
+        store.modalStore.closeModal();
+    }
+
     getUser = async () => {
         try{
             const user = await agent.Account.current();
