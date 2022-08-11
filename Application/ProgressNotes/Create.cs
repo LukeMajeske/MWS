@@ -50,6 +50,8 @@ namespace Application.ProgressNotes
                     ProgressAmount = request.ProgressAmount
                 };
 
+                website.Progress += progressNote.ProgressAmount;
+
                 await _context.ProgressNotes.AddAsync(progressNote);
 
                 var progressNoteDto = _mapper.Map<ProgressNoteDto>(progressNote);

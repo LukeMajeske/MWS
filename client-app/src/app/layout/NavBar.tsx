@@ -35,7 +35,7 @@ export default observer(function NavBar()
                 <Image src={'/assets/mws-logo-512.png'} size={"tiny"}></Image>
             </Menu.Item>
             {/*<Menu.Item as={NavLink} to='/faq'>F.A.Q</Menu.Item>*/}
-            <Menu.Item as={NavLink} to='/contact'>Contact</Menu.Item>
+            {/*<Menu.Item as={NavLink} to='/contact'>Contact</Menu.Item>*/}
             <Menu.Item>Portfolio</Menu.Item>
             {displayProfile()}
             {displaySuperAdmin()}

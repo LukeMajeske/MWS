@@ -10,11 +10,8 @@ export default function HomePage(){
             <title>MWS | Home</title>
             <SlideShow/>
             <div className="segment-div">
-                <Header as="h1">Meet Luke!</Header>
-                <Grid stackable centered columns={3}>
-                    <Grid.Column>
-                            <Image src='../assets/luke-web-pic.jpg' size="large" rounded></Image>
-                    </Grid.Column>
+                <Header as="h1">About Me!</Header>
+                <Grid stackable centered columns={2}>
                     <Grid.Column>
                         <Segment className="about-section" raised style={{height:'100%'}}>
                             <Header as="h1" style={{color:"black"}}>My Goal</Header>
@@ -28,17 +25,28 @@ export default function HomePage(){
                     <Grid.Column>
                             <Segment className="my-tools" raised style={{height:'100%'}}>
                                 <Header as="h1" style={{color:"black"}}>My Tools</Header>
-                                    <Grid className="tool-grid" centered columns={2}>
-                                        <Grid.Column >
-                                            <Image rounded as="a" href="https://reactjs.org/" size="small" src="../logo512.png"></Image>
-                                            <Image rounded as="a" href="https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet" size="small" src="../assets/NET_Core_Logo.png"></Image>
-                                        </Grid.Column>
-                                        <Grid.Column>
-                                            <Image rounded as="a" href="https://www.postgresql.org/" size="small" src="../assets/postgresql.png"></Image>
-                                            <div className="tool-img">
+                                    <Grid centered columns={2}>
+                                        <Grid.Row>
+                                            <Grid.Column>
+                                                <Image rounded as="a" 
+                                                href="https://reactjs.org/" 
+                                                size="small" 
+                                                src="../logo512.png"
+                                                ></Image>
+                                            </Grid.Column>
+                                            <Grid.Column >
+                                                <Image rounded as="a" href="https://dotnet.microsoft.com/learn/dotnet/what-is-dotnet" size="small" src="../assets/NET_Core_Logo.png"></Image>
+                                            </Grid.Column>
+                                        </Grid.Row>
+                                        <Grid.Row>
+                                            <Grid.Column >
+                                                <Image rounded as="a" href="https://www.postgresql.org/" size="small" src="../assets/postgresql.png"></Image>
+                                            </Grid.Column>
+                                            <Grid.Column>
+                                            
                                                 <Image rounded as="a" href="https://www.heroku.com/about" size="tiny" src="../assets/heroku-logo.png"></Image>
-                                            </div>
-                                        </Grid.Column>
+                                            </Grid.Column>
+                                        </Grid.Row>
                                     </Grid>
                             </Segment>
                     </Grid.Column>

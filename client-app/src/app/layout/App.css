@@ -250,6 +250,11 @@ footer{
 }
 
 /*Portfolio Slider*/
+.portfolio{
+  padding:30px;
+
+}
+
 .port-slideshow {
   position: relative;
   overflow: hidden;
@@ -337,15 +342,20 @@ footer{
 
 
 .ui.tiny.rounded.image{
-  margin-left:33%;
-  padding-top: 5%;
+  margin-left:28%;
+  padding: 5px;
+}
+
+.ui.small.rounded.image{
+  margin-left:20%;
+  padding: 5px;
 }
 
 .tool-img{
   border-radius: .3125em;
 }
 
-.ui.small.image:hover, .tool-img:hover{
+.ui.small.image:hover, .ui.tiny.rounded.image:hover{
   background-color: var(--primary-light);
   transition: background-color 0.5s ease-in-out;
 }

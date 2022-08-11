@@ -27,7 +27,7 @@ export default observer(function ProgressFeed()
 
     return(
         <Segment>
-            <Header as='h1' className="black-header">Progress Feed</Header>
+            <Header as='h1' className="black-header">Progress Tracker</Header>
             {filterTickets()}
         </Segment>
     )

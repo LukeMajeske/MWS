@@ -9,7 +9,7 @@ import { Header, Segment } from "semantic-ui-react";
 const images = [website_img, client_img];
 const delay = 5000;
 
-function SlideShow() {
+export default function SlideShow() {
   const [index, setIndex] = React.useState(0);
   const timeoutRef = React.useRef(null);
 
@@ -78,7 +78,3 @@ function SlideShow() {
     </div>
   );
 }
-
-ReactDOM.render(<SlideShow/>, document.getElementById("root"));
-
-export default SlideShow;

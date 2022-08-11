@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
+import React, { useEffect, useState } from "react";
 import { Button, Header, Progress, Segment, Comment } from "semantic-ui-react";
 import { Website } from "../../app/models/website";
 import { useStore } from "../../app/stores/store";
@@ -11,12 +12,10 @@ interface Props{
     website: Website
 }
 
-export default function WebsiteItem({website}:Props){
-    const {modalStore} = useStore();
-
+export default observer(function WebsiteItem({website}:Props){
+    const {modalStore, progressStore} = useStore();
     const[showNotes, setShowNotes] = useState(false);
-
-
+    const{progressRegistry} = progressStore;
 
     return(
         <Segment>
@@ -35,4 +34,4 @@ export default function WebsiteItem({website}:Props){
             }  
         </Segment>
     )
-}
+})
