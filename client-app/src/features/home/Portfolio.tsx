@@ -11,17 +11,19 @@ const _slides=[
     {
         image:cub3ski_img,
         header:"Game I created with React!",
-        href:"https://cub3ski.com"
+        href:"https://cub3ski.com",
+        code_href:"https://github.com/LukeMajeske/Cub3ski/tree/cub3ski_main/numble-app"
     },
     {
         image:CCSC_img,
         header:"My first website with Wordpress!",
-        href:"https://crushcovidstreakchallenge.com/"
+        href:"https://crushcovidstreakchallenge.com/",
+        code_href:"https://github.com/LukeMajeske/crushcovidstreakchallenge.com"
     }
 ]
 
 const translateFactor = (1/(_slides.length+2)*100);
-const delay = 10000;
+const delay = 100000;
 let slideKey = 0;
 
 
@@ -34,7 +36,7 @@ function createSlide(index){
     const props = _slides[index];
     slideKey++;
     return(
-        <Slide key={`slide${slideKey}`} image={props.image} header={props.header} href={props.href}></Slide>
+        <Slide key={`slide${slideKey}`} image={props.image} header={props.header} href={props.href} code_href={props.code_href}></Slide>
     )
 
 }

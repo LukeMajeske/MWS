@@ -250,6 +250,10 @@ footer{
 }
 
 /*Portfolio Slider*/
+.ui.card{
+  transition: none;
+}
+
 .portfolio{
   padding:30px;
 
