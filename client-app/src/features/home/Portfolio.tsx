@@ -21,7 +21,7 @@ const _slides=[
 ]
 
 const translateFactor = (1/(_slides.length+2)*100);
-const delay = 10000;
+const delay = 100000;
 let slideKey = 0;
 
 
